@@ -18,21 +18,19 @@ jobs:
         # sudo apt-get update
         # sudo apt-get install postgresql postgresql-contrib -y
         # sudo service postgresql start
+
         sudo apt-get update
         echo "*** START POSTGRESQL"
+        sudo apt-get install postgresql -y
+        sudo apt-get install postgresql-contrib -y
+        sudo apt-get install postgresql-client -y
 
-        sudo apt-get --yes install postgresql
-        sudo apt-get --yes install postgresql-contrib
-        sudo apt-get --yes install postgresql-client
-
-        # sudo service postgresql status
-        echo hi...
+        echo waiting...
         sleep 6
         sudo service postgresql start
-        echo bye...
 
-        sudo su - postgres -c "psql --echo-all -U postgres -d postgres --command \"create database prod;\""
-        sudo su - postgres -c "psql --echo-all -U postgres -d postgres --command \"alter user postgres with password 'foobar';\""
+        sudo su - postgres -c "psql --echo-all -U postgres -d postgres --command \"create user runner;\""
+        sudo su - postgres -c "psql --echo-all -U postgres -d postgres --command \"alter user runner with password 'password';\""
 
         echo finished pg commands...
         # # restart postgresql service for changes to take effect
@@ -40,14 +38,6 @@ jobs:
 
         echo "*** DONE"
 
-    # - name: Wait for PostgreSQL to start
-    #   run: |
-    #     while ! pg_isready -h localhost -p 5432 -U postgres > /dev/null 2>&1; do
-    #       echo "Waiting for PostgreSQL to start..."
-    #       sleep 1
-    #     done
-    #     echo "PostgreSQL started"
-    #     sudo systemctl status postgresql
 
     # - name: Create PostgreSQL role
     #   run: |
