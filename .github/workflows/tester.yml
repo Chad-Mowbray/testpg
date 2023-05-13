@@ -39,7 +39,7 @@ jobs:
 
     - name: Run db_schema.sql
       run: |
-        psql -h localhost -U runner -d postgres -f db_schema.sql
+        psql postgresql://runner:password@postgres:5432/tester -f db_schema.sql
 
     - name: Load data
       run: |
