@@ -28,13 +28,13 @@ jobs:
         service postgresql status
         service postgresql start
 
-        sudo su - postgres -c "psql --echo-all -U postgres -d postgres --command \"create database prod;\""
-        sudo su - postgres -c "psql --echo-all -U postgres -d postgres --command \"alter user postgres with password 'foobar';\""
+        # sudo su - postgres -c "psql --echo-all -U postgres -d postgres --command \"create database prod;\""
+        # sudo su - postgres -c "psql --echo-all -U postgres -d postgres --command \"alter user postgres with password 'foobar';\""
 
-        # restart postgresql service for changes to take effect
-        sudo service postgresql restart
+        # # restart postgresql service for changes to take effect
+        # sudo service postgresql restart
 
-        echo "*** DONE"
+        # echo "*** DONE"
 
     # - name: Wait for PostgreSQL to start
     #   run: |
@@ -45,14 +45,14 @@ jobs:
     #     echo "PostgreSQL started"
     #     sudo systemctl status postgresql
 
-    - name: Create PostgreSQL role
-      run: |
-        #ERROR ORIGINATES HERE#
-        echo  Create PostgreSQL role
-        sudo  su - postgres createuser -s runner
-        echo created user runner
-        sudo su - postgres psql -c "ALTER ROLE runner WITH PASSWORD 'password';"
-        echo altered role runner..
+    # - name: Create PostgreSQL role
+    #   run: |
+    #     #ERROR ORIGINATES HERE#
+    #     echo  Create PostgreSQL role
+    #     sudo  su - postgres createuser -s runner
+    #     echo created user runner
+    #     sudo su - postgres psql -c "ALTER ROLE runner WITH PASSWORD 'password';"
+    #     echo altered role runner..
 
     # - name: Run db_schema.sql
     #   run: |
