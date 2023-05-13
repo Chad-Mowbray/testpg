@@ -25,8 +25,9 @@ jobs:
         sudo apt-get --yes install postgresql-contrib
         sudo apt-get --yes install postgresql-client
 
-        sudo service postgresql status
+        # sudo service postgresql status
         echo hi...
+        sleep 6
         sudo service postgresql start
         echo bye...
 
