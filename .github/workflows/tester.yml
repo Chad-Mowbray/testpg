@@ -25,8 +25,10 @@ jobs:
         sudo apt-get --yes install postgresql-contrib
         sudo apt-get --yes install postgresql-client
 
-        service postgresql status
-        service postgresql start
+        sudo service postgresql status
+        echo hi...
+        sudo service postgresql start
+        echo bye...
 
         # sudo su - postgres -c "psql --echo-all -U postgres -d postgres --command \"create database prod;\""
         # sudo su - postgres -c "psql --echo-all -U postgres -d postgres --command \"alter user postgres with password 'foobar';\""
