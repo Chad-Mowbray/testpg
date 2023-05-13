@@ -31,9 +31,10 @@ jobs:
         sudo service postgresql start
         echo bye...
 
-        # sudo su - postgres -c "psql --echo-all -U postgres -d postgres --command \"create database prod;\""
-        # sudo su - postgres -c "psql --echo-all -U postgres -d postgres --command \"alter user postgres with password 'foobar';\""
+        sudo su - postgres -c "psql --echo-all -U postgres -d postgres --command \"create database prod;\""
+        sudo su - postgres -c "psql --echo-all -U postgres -d postgres --command \"alter user postgres with password 'foobar';\""
 
+        echo finished pg commands...
         # # restart postgresql service for changes to take effect
         # sudo service postgresql restart
 
