@@ -32,9 +32,9 @@ jobs:
       run: |
         #ERROR ORIGINATES HERE#
         echo  Create PostgreSQL role
-        sudo -u postgres createuser -s runner
+        sudo  su - postgres createuser -s runner
         echo created user runner
-        sudo -u postgres psql -c "ALTER ROLE runner WITH PASSWORD 'password';"
+        sudo su - postgres psql -c "ALTER ROLE runner WITH PASSWORD 'password';"
         echo altered role runner..
 
     # - name: Run db_schema.sql
