@@ -1,0 +1,50 @@
+name: PostgreSQL and Data Loading
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up PostgreSQL
+      run: |
+        sudo apt-get update
+        sudo apt-get install postgresql postgresql-contrib -y
+        sudo service postgresql start
+
+    - name: Wait for PostgreSQL to start
+      run: |
+        while ! pg_isready -h localhost -p 5432 -U postgres > /dev/null 2>&1; do
+          echo "Waiting for PostgreSQL to start..."
+          sleep 1
+        done
+        echo "PostgreSQL started"
+        sudo systemctl status postgresql
+
+    - name: Create PostgreSQL role
+      run: |
+        #ERROR ORIGINATES HERE#
+        echo  Create PostgreSQL role
+        sudo -u postgres createuser -s runner
+        echo created user runner
+        sudo -u postgres psql -c "ALTER ROLE runner WITH PASSWORD 'password';"
+        echo altered role runner..
+
+    # - name: Run db_schema.sql
+    #   run: |
+    #     psql -h localhost -U runner -d postgres -f db_schema.sql
+
+    # - name: Load data
+    #   run: |
+    #     psql -h localhost -U runner -d postgres -f data.sql
+
+    # - name: Run queries
+    #   run: |
+    #     psql -h localhost -U runner -d postgres -f queries.sql
