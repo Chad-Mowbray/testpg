@@ -41,10 +41,10 @@ jobs:
       run: |
         psql postgresql://runner:password@localhost:5432/postgres -f db_schema.sql
 
-    # - name: Load data
-    #   run: |
-    #     psql -h localhost -U runner -d postgres -f data.sql
+    - name: Load data
+      run: |
+        psql postgresql://runner:password@localhost:5432/postgres  -f data.sql
 
-    # - name: Run queries
-    #   run: |
-    #     psql -h localhost -U runner -d postgres -f queries.sql
+    - name: Run queries
+      run: |
+        psql postgresql://runner:password@localhost:5432/postgres -f queries.sql
