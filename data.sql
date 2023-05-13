@@ -1,0 +1,1 @@
+insert into tester (id, letter) values(3, "abc");

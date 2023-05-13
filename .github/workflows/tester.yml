@@ -33,29 +33,18 @@ jobs:
         sudo su - postgres -c "psql --echo-all -U postgres -d postgres --command \"alter user runner with password 'password';\""
 
         echo finished pg commands...
-        # # restart postgresql service for changes to take effect
         sudo service postgresql restart
 
         echo "*** DONE"
 
+    - name: Run db_schema.sql
+      run: |
+        psql -h localhost -U runner -d postgres -f db_schema.sql
 
-    # - name: Create PostgreSQL role
-    #   run: |
-    #     #ERROR ORIGINATES HERE#
-    #     echo  Create PostgreSQL role
-    #     sudo  su - postgres createuser -s runner
-    #     echo created user runner
-    #     sudo su - postgres psql -c "ALTER ROLE runner WITH PASSWORD 'password';"
-    #     echo altered role runner..
+    - name: Load data
+      run: |
+        psql -h localhost -U runner -d postgres -f data.sql
 
-    # - name: Run db_schema.sql
-    #   run: |
-    #     psql -h localhost -U runner -d postgres -f db_schema.sql
-
-    # - name: Load data
-    #   run: |
-    #     psql -h localhost -U runner -d postgres -f data.sql
-
-    # - name: Run queries
-    #   run: |
-    #     psql -h localhost -U runner -d postgres -f queries.sql
+    - name: Run queries
+      run: |
+        psql -h localhost -U runner -d postgres -f queries.sql
