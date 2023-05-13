@@ -36,9 +36,9 @@ jobs:
 
         echo finished pg commands...
         # # restart postgresql service for changes to take effect
-        # sudo service postgresql restart
+        sudo service postgresql restart
 
-        # echo "*** DONE"
+        echo "*** DONE"
 
     # - name: Wait for PostgreSQL to start
     #   run: |
